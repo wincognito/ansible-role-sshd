@@ -1,0 +1,13 @@
+---
+
+
+- name: update sshd.conf
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.old }}"
+    line: "{{ item.new }}"
+  loop: "{{ sshd_config_regex_changes }}"
+  notify:
+    "restart sshd"
+
+

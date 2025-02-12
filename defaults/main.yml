@@ -1,0 +1,19 @@
+---
+# source:
+# https://linux.die.net/man/5/sshd_config
+
+
+sshd_config_regex_changes:
+- old: "^#?Port "
+  new: "Port 4558"
+
+  # possible values:
+  # yes, without-password, forced-commands-only, no
+# - old: "^#?PermitRootLogin "
+#   new: "PermitRootLogin without-password"
+
+- old: "^#?PasswordAuthentication"
+  new: "PasswordAuthentication no"
+
+- old: "^#?X11Forwarding "
+  new: "X11Forwarding no"    
