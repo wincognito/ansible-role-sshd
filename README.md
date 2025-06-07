@@ -12,7 +12,16 @@ No requirements.
 Role Variables
 --------------
 
-Change `sshd_config_regex_changes` according to your needs.
+Change the variables:
+```
+sshd_port: 22 # i.e. 4558
+sshd_permit_root_login: without-password # possible values: yes, without-password, forced-commands-only, no
+sshd_strict_mode: yes # Checks ~/.ssh permissions
+sshd_max_auth_tries: 3
+sshd_login_grace_time: 30s
+```
+
+For complete customization change `sshd_config_regex_changes` according to your needs.
 
 ```
 sshd_config_regex_changes:
@@ -26,6 +35,12 @@ sshd_config_regex_changes:
 
 - old: "^#?X11Forwarding "
   new: "X11Forwarding no"   
+```
+
+#### In case sshd does not want to restart
+Validate configuration
+```
+sudo sshd -t
 ```
 
 

@@ -1,6 +1,4 @@
 ---
-
-
 - name: update sshd.conf
   lineinfile:
     path: /etc/ssh/sshd_config
@@ -9,5 +7,4 @@
   loop: "{{ sshd_config_regex_changes }}"
   notify:
     "restart sshd"
-
-
+  become: true

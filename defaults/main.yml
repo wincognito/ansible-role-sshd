@@ -2,18 +2,41 @@
 # source:
 # https://linux.die.net/man/5/sshd_config
 
+sshd_port: 22 # i.e. 4558
+sshd_permit_root_login: without-password # possible values: yes, without-password, forced-commands-only, no
+sshd_strict_mode: "yes" # Checks ~/.ssh permissions, the value must be in "" since it is a string value
+sshd_max_auth_tries: 3
+sshd_login_grace_time: 30s
+
+# Further hardening:
+# AllowUsers your_username
+# AllowGroups ssh_users
+
 
 sshd_config_regex_changes:
-- old: "^#?Port "
-  new: "Port 4558"
+- old: "^#?AllowAgentForwarding"
+  new: "AllowAgentForwarding no"
 
-  # possible values:
-  # yes, without-password, forced-commands-only, no
-# - old: "^#?PermitRootLogin "
-#   new: "PermitRootLogin without-password"
+- old: "^#?LoginGraceTime"
+  new: "LoginGraceTime {{ sshd_login_grace_time }}"
+
+- old: "^#?MaxAuthTries"
+  new: "MaxAuthTries {{ sshd_max_auth_tries }}"
 
 - old: "^#?PasswordAuthentication"
   new: "PasswordAuthentication no"
+
+- old: "^#?PermitRootLogin "
+  new: "PermitRootLogin {{ sshd_permit_root_login }}"
+
+- old: "^#?PermitTunnel "
+  new: "PermitTunnel no"  
+
+- old: "^#?Port "
+  new: "Port {{ sshd_port }}"
+
+- old: "^#?StrictModes"
+  new: "StrictModes {{ sshd_strict_mode }}"
 
 - old: "^#?X11Forwarding "
   new: "X11Forwarding no"    
