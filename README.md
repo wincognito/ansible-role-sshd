@@ -1,7 +1,7 @@
-Role Name
+SSHD
 =========
 
-Update `/etc/ssh/sshd.conf` according to the `sshd_config_regex_changes`.
+Updates `/etc/ssh/sshd.conf` according to the `sshd_config_regex_changes`.
 
 Requirements
 ------------
@@ -11,6 +11,8 @@ No requirements.
 
 Role Variables
 --------------
+
+Change `sshd_config_regex_changes` according to your needs.
 
 ```
 sshd_config_regex_changes:
@@ -44,12 +46,11 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 (c) 2021 Pawel Idzikowski
 
 Author Information
 ------------------
 
-Pawel Idzikowski  
-http://polenter.com
+Pawel Idzikowski
